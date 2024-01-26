@@ -4,7 +4,21 @@ import UIKit
 // map, filter, reduce
 
 // Higher order function = the functtion that has one parameter as a clouser.
+
+var dogs : [String: Int] = ["Fido": 2 ,
+                            "LoLo": 10,
+                            "Spark":1]
+
+print( dogs.map { (name,age) in
+        return "The doge name is \(name) and its age is \(age)"
+})
+print(dogs.map({"The doge name is \($0) and its age is \($1)"}))
+
+
+
+
 var stringarray = ["a","b","c","d"]
+
 print(stringarray.map { letter in
     return letter.uppercased()
 })
