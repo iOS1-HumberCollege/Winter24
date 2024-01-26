@@ -9,6 +9,10 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    
+    @IBOutlet weak var calculatorText: UILabel!
+    
+    
     @IBOutlet weak var titleLabel: UILabel!
     
     var myfirstname = "Rania"
@@ -43,16 +47,23 @@ class ViewController: UIViewController {
         titleLabel.isHidden = false
         var clickedButton = sender as! UIButton
         if let goodTitle =  clickedButton.titleLabel!.text{
-            titleLabel.text = "\(titleLabel.text!)\(goodTitle)"
+            calculatorText.text = "\(calculatorText.text!)\(goodTitle)"
         }
-        
-//        if (sender as! UIButton){
-//            
-//        }
     }
     
     
-//    @IBAction func twoClicked(_ sender: Any) {
+    @IBAction func equalButtonCLicked(_ sender: Any) {
+        titleLabel.isHidden = false
+        var clickedButton = sender as! UIButton
+        var result = CalculatorBrain().doMath(statment: calculatorText.text!)
+        
+        if let goodTitle =  clickedButton.titleLabel!.text{
+            calculatorText.text = "\(calculatorText.text!)\(goodTitle)\(result)"
+            // do the math
+        }
+        
+    }
+    //    @IBAction func twoClicked(_ sender: Any) {
 //
 //        titleLabel.text = "Two Is Clicked"
 //    }
