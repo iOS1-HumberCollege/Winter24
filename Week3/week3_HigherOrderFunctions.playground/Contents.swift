@@ -5,6 +5,29 @@ import UIKit
 
 // Higher order function = the functtion that has one parameter as a clouser.
 
+var names = ["Rania", "John","Mary","Lee"]
+var welcomeMes = names.map { name in
+    return "Welcome \(name)"
+}
+var newNames = names.map({"Welcome \($0)"})
+print(newNames)
+
+print(welcomeMes)
+
+var prices = [22.99 , 33.2 ,55.99,10.1, 3.4, 90.99]
+// Map
+var totalprice = prices.map { price in
+    return price * 1.13
+}
+var shortcut = prices.map({$0 * 1.13})
+print(shortcut)
+
+
+
+
+
+
+
 var myfirstFunc = {(a: Int, b: Int)-> Int in
         return a + b
 }
@@ -37,9 +60,10 @@ func alter (array : [String], changeArray : (String)->String )->[String] {
     return newArray
 }
 
-var names = ["Rania", "John","Mary","Lee"]
-
-
+print( alter(array: names) { name in
+    return "Welcome \(name) to our class"
+}
+       )
 var stringarray = ["a","b","c","d"]
 var toUpper : (String)->String = { (item : String) -> String in return item.uppercased()
 }
