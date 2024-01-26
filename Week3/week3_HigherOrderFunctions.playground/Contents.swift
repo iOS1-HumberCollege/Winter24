@@ -4,7 +4,11 @@ import UIKit
 // map, filter, reduce
 
 // Higher order function = the functtion that has one parameter as a clouser.
-
+var stringarray = ["a","b","c","d"]
+print(stringarray.map { letter in
+    return letter.uppercased()
+})
+print(stringarray.map({$0.uppercased()}) )
 var names = ["Rania", "John","Mary","Lee"]
 var welcomeMes = names.map { name in
     return "Welcome \(name)"
@@ -19,13 +23,29 @@ var prices = [22.99 , 33.2 ,55.99,10.1, 3.4, 90.99]
 var totalprice = prices.map { price in
     return price * 1.13
 }
-var shortcut = prices.map({$0 * 1.13})
+var shortcut = prices.map {$0 * 1.13}
 print(shortcut)
 
+// filter
+print( prices.filter { price in
+    return price <= 50.0
+})
+print( prices.filter {$0>50.5})
+
+// reduce
+
+var totalPrice = prices.reduce(0) { partialResult, price in
+    return partialResult + price
+}
+print(totalPrice)
+
+ names.reduce("Thanks for joining Us: ") { partialResult, name in
+    return partialResult + " \(name)"
+}
+var allNames = names.reduce("", {$0 + " \($1)"})
 
 
-
-
+print(allNames)
 
 
 var myfirstFunc = {(a: Int, b: Int)-> Int in
@@ -64,7 +84,6 @@ print( alter(array: names) { name in
     return "Welcome \(name) to our class"
 }
        )
-var stringarray = ["a","b","c","d"]
 var toUpper : (String)->String = { (item : String) -> String in return item.uppercased()
 }
 alter(array: stringarray, changeArray: toUpper)
