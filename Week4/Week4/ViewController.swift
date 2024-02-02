@@ -11,6 +11,10 @@ class ViewController: UIViewController , UITableViewDataSource , UITableViewDele
     @IBOutlet weak var namesTable: UITableView!
     
     var names = ["Rania","John","Mary","Lee"]
+    
+    var friends = ["Rahi","Smith","Jo"]
+    
+
     @IBOutlet weak var titleText: UILabel!
     
     
@@ -21,12 +25,25 @@ class ViewController: UIViewController , UITableViewDataSource , UITableViewDele
         namesTable.dataSource = self
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return names.count
+        if tableView.tag == 0{
+            return names.count
+        } else {
+            return friends.count
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var cell = tableView.dequeueReusableCell(withIdentifier: "cell")
-        cell?.textLabel?.text = names[indexPath.row]
+        let cell : UITableViewCell?
+        if tableView.tag == 0 {
+            
+            cell = tableView.dequeueReusableCell(withIdentifier: "cell")
+            cell?.textLabel?.text = names[indexPath.row]
+        }
+        else {
+            
+            cell = tableView.dequeueReusableCell(withIdentifier: "cell")
+            cell?.textLabel?.text = friends[indexPath.row]
+        }
         return cell!
     }
     
