@@ -54,8 +54,8 @@ class ViewController: UIViewController {
     
     @IBAction func equalButtonCLicked(_ sender: Any) {
         titleLabel.isHidden = false
-        var clickedButton = sender as! UIButton
-        var result = CalculatorBrain().doMath(statment: calculatorText.text!)
+        let clickedButton = sender as! UIButton
+        let result = CalculatorBrain().doMath(statment: calculatorText.text!)
         
         if let goodTitle =  clickedButton.titleLabel!.text{
             calculatorText.text = "\(calculatorText.text!)\(goodTitle)\(result)"

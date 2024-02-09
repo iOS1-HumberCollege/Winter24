@@ -14,13 +14,14 @@ class ViewController: UIViewController , UITableViewDataSource , UITableViewDele
     
     var friends = ["Rahi","Smith","Jo"]
     
-
+    @IBOutlet weak var unitsegment: UISegmentedControl!
+    
     @IBOutlet weak var titleText: UILabel!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        titleText.text = "Hello Week 4"
+      
         namesTable.delegate = self
         namesTable.dataSource = self
     }
@@ -58,5 +59,18 @@ class ViewController: UIViewController , UITableViewDataSource , UITableViewDele
         
         titleText.text = "Hello \(names[indexPath.row])"
     }
+    
+    
+    @IBAction func onUnitChange(_ sender: UISegmentedControl) {
+    
+        if  sender.selectedSegmentIndex == 0 {
+            titleText.text = "cm/kg"
+        }else {
+            
+            titleText.text = "in/lb"
+        }
+        
+    }
+    
 }
 
