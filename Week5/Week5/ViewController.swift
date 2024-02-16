@@ -60,11 +60,22 @@ class ViewController: UIViewController , UITableViewDelegate, UITableViewDataSou
     }
     
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier == "green"{
+            
+            let GVC = segue.destination as? GreenViewController
+            GVC?.numOfContact = allContacts.count
+        }
+        else {
+           let RVC = segue.destination as? RedViewController
+            RVC?.isThereContacts = !allContacts.isEmpty
+        }
+    }
+    
     
     @IBAction func saveClicked(_ sender: Any) {
-//        guard <#condition#> else {
-//            <#statements#>
-//        }
+
         
         
         

@@ -7,11 +7,16 @@
 
 import UIKit
 
-class SecondViewController: UIViewController {
+class GreenViewController: UIViewController {
 
+    @IBOutlet weak var ContactNumberText: UILabel!
+    var numOfContact = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        ContactNumberText.text = "\(numOfContact)"
+        
         // Do any additional setup after loading the view.
     }
     

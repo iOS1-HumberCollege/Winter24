@@ -15,7 +15,8 @@
 		21D050962B765D900059600A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 21D050942B765D900059600A /* LaunchScreen.storyboard */; };
 		21D0509E2B76603C0059600A /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21D0509D2B76603C0059600A /* Contact.swift */; };
 		21DA91562B7F9C7100A0F3CA /* contactTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21DA91552B7F9C7100A0F3CA /* contactTableViewCell.swift */; };
-		21DA91582B7FA45100A0F3CA /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21DA91572B7FA45100A0F3CA /* SecondViewController.swift */; };
+		21DA91582B7FA45100A0F3CA /* GreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21DA91572B7FA45100A0F3CA /* GreenViewController.swift */; };
+		21DA915A2B7FAAC800A0F3CA /* RedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21DA91592B7FAAC800A0F3CA /* RedViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,7 +30,8 @@
 		21D050972B765D900059600A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		21D0509D2B76603C0059600A /* Contact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contact.swift; sourceTree = "<group>"; };
 		21DA91552B7F9C7100A0F3CA /* contactTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = contactTableViewCell.swift; sourceTree = "<group>"; };
-		21DA91572B7FA45100A0F3CA /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
+		21DA91572B7FA45100A0F3CA /* GreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GreenViewController.swift; sourceTree = "<group>"; };
+		21DA91592B7FAAC800A0F3CA /* RedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,7 +73,8 @@
 				21D050972B765D900059600A /* Info.plist */,
 				21D0509D2B76603C0059600A /* Contact.swift */,
 				21DA91552B7F9C7100A0F3CA /* contactTableViewCell.swift */,
-				21DA91572B7FA45100A0F3CA /* SecondViewController.swift */,
+				21DA91572B7FA45100A0F3CA /* GreenViewController.swift */,
+				21DA91592B7FAAC800A0F3CA /* RedViewController.swift */,
 			);
 			path = Week5;
 			sourceTree = "<group>";
@@ -147,7 +150,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				21DA91582B7FA45100A0F3CA /* SecondViewController.swift in Sources */,
+				21DA915A2B7FAAC800A0F3CA /* RedViewController.swift in Sources */,
+				21DA91582B7FA45100A0F3CA /* GreenViewController.swift in Sources */,
 				21D0509E2B76603C0059600A /* Contact.swift in Sources */,
 				21DA91562B7F9C7100A0F3CA /* contactTableViewCell.swift in Sources */,
 				21D0508E2B765D8F0059600A /* ViewController.swift in Sources */,
