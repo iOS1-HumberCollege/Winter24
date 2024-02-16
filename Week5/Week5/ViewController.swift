@@ -7,8 +7,13 @@
 
 import UIKit
 
-class ViewController: UIViewController , UITableViewDelegate, UITableViewDataSource{
-
+class ViewController: UIViewController , UITableViewDelegate, UITableViewDataSource ,UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    var newcontact = Contact()
+    
+    
+    var selectedImage = UIImage(named: "emptyImage")
+    
+    @IBOutlet weak var contactImg: UIImageView!
     
     @IBOutlet weak var contactTable: UITableView!
     @IBOutlet weak var contactNameText: UITextField!
@@ -37,12 +42,17 @@ class ViewController: UIViewController , UITableViewDelegate, UITableViewDataSou
     }
 
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 100
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell { // 3
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell")
-        
-        cell?.textLabel?.text = allContacts[indexPath.row].name
-        cell?.detailTextLabel?.text = allContacts[indexPath.row].number
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as? contactTableViewCell
+        cell?.nameText.text = allContacts[indexPath.row].name
+        cell?.numberText.text = allContacts[indexPath.row].number
+        cell?.contactImg.image = allContacts[indexPath.row].image
+        cell?.locationText.text = allContacts[indexPath.row].location
         
         
         return cell!
@@ -65,20 +75,31 @@ class ViewController: UIViewController , UITableViewDelegate, UITableViewDataSou
                     
                     alert.addAction(UIAlertAction(title: "SIM1?", style: .default, handler: { action in
                             ///
-                        self.allContacts.append(Contact(name: goodname, number: goodNum))
+                        self.newcontact.name = goodname
+                        self.newcontact.number = goodNum
+                        self.newcontact.location = "SIM1"
+                        self.newcontact.image = self.selectedImage
+                        self.allContacts.append(self.newcontact)
+
                         // update the table // reload
                         self.contactTable.reloadData()
                         self.clearTexts()
+                        self.selectedImage = UIImage(named: "emptyImage")
                         
                     }))
                     
                     
                     alert.addAction(UIAlertAction(title: "SIM2?", style: .default, handler: { action in
                             ///
-                        self.allContacts.append(Contact(name: goodname, number: goodNum))
+                        self.newcontact.name = goodname
+                        self.newcontact.number = goodNum
+                        self.newcontact.location = "SIM2"
+                        self.newcontact.image = self.selectedImage
+                        self.allContacts.append(self.newcontact)
                         // update the table // reload
                         self.contactTable.reloadData()
                         self.clearTexts()
+                        self.selectedImage = UIImage(named: "emptyImage")
                         
                     }))
                     
@@ -103,10 +124,10 @@ class ViewController: UIViewController , UITableViewDelegate, UITableViewDataSou
             }else {}
         }else {}
         
-        
-        
+        newcontact = Contact()
+        contactImg.image = UIImage(named: "emptyImage")
+       //
     }
-    
     
     @IBAction func clearClicked(_ sender: Any) {
         clearTexts()
@@ -120,21 +141,98 @@ class ViewController: UIViewController , UITableViewDelegate, UITableViewDataSou
         
     }
     
+//    
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        
+//        var selectedContact = allContacts[indexPath.row]
+//        
+//        let alert = UIAlertController(title: "Calling Or SMS \(selectedContact.name)?", message: "", preferredStyle: .alert)
+//        
+//        alert.addAction(UIAlertAction(title: "Call \(selectedContact.name)", style: .default))
+//        
+//        alert.addAction(UIAlertAction(title: "Send SMS to \(selectedContact.name)", style: .default))
+//        alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel))
+//        
+//        present(alert, animated: true)
+//        
+//        
+//    }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool{
         
-        var selectedContact = allContacts[indexPath.row]
+        return true
+    }
+    
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath){
         
-        let alert = UIAlertController(title: "Calling Or SMS \(selectedContact.name)?", message: "", preferredStyle: .alert)
+        switch (editingStyle){
+        case .delete :
+            var selectedContact = allContacts[indexPath.row]
+            let alert = UIAlertController(title: "Be Carful?", message: "Are You Sure you want to delete \(selectedContact.name)", preferredStyle: .alert)
+            
+            alert.addAction(UIAlertAction(title: "Delete", style: .destructive,handler: { action in
+                    self.allContacts.remove(at: indexPath.row)
+                    self.contactTable.reloadData()
+            }))
+            
+            alert.addAction(UIAlertAction(title: "No", style: .cancel))
+            
+            present(alert, animated: true)
+            
+            
+            
+            break;
+        case .none: break
+        case .insert: break
+        @unknown default:
+            break;
+        }
         
-        alert.addAction(UIAlertAction(title: "Call \(selectedContact.name)", style: .default))
-        
-        alert.addAction(UIAlertAction(title: "Send SMS to \(selectedContact.name)", style: .default))
-        alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel))
-        
-        present(alert, animated: true)
         
         
     }
+
+    
+    @IBAction func uploadPhoto(_ sender: Any) {
+        let imagePickerController = UIImagePickerController()
+        
+       imagePickerController.sourceType  = .photoLibrary
+
+//        if UIImagePickerController.isSourceTypeAvailable(.camera) {
+//            imagePickerController.sourceType  = .camera
+//        }else{
+//            imagePickerController.sourceType  = .photoLibrary
+//        }
+        imagePickerController.delegate = self
+        
+        present(imagePickerController, animated: true)
+        
+        
+        
+    }
+    
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]){
+        
+        print("One image has been selected")
+       
+      
+        selectedImage = info[.originalImage] as? UIImage
+        contactImg.image = info[.originalImage] as? UIImage
+        
+        dismiss(animated: true)
+    }
+
+   
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        print("No image has been selected")
+        newcontact.image = nil
+        selectedImage = UIImage(named: "emptyImage")
+        dismiss(animated: true)
+        
+    }
+
+    
 }
 

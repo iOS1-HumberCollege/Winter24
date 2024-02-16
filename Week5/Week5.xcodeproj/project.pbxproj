@@ -14,6 +14,8 @@
 		21D050932B765D900059600A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 21D050922B765D900059600A /* Assets.xcassets */; };
 		21D050962B765D900059600A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 21D050942B765D900059600A /* LaunchScreen.storyboard */; };
 		21D0509E2B76603C0059600A /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21D0509D2B76603C0059600A /* Contact.swift */; };
+		21DA91562B7F9C7100A0F3CA /* contactTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21DA91552B7F9C7100A0F3CA /* contactTableViewCell.swift */; };
+		21DA91582B7FA45100A0F3CA /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21DA91572B7FA45100A0F3CA /* SecondViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +28,8 @@
 		21D050952B765D900059600A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		21D050972B765D900059600A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		21D0509D2B76603C0059600A /* Contact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contact.swift; sourceTree = "<group>"; };
+		21DA91552B7F9C7100A0F3CA /* contactTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = contactTableViewCell.swift; sourceTree = "<group>"; };
+		21DA91572B7FA45100A0F3CA /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +70,8 @@
 				21D050942B765D900059600A /* LaunchScreen.storyboard */,
 				21D050972B765D900059600A /* Info.plist */,
 				21D0509D2B76603C0059600A /* Contact.swift */,
+				21DA91552B7F9C7100A0F3CA /* contactTableViewCell.swift */,
+				21DA91572B7FA45100A0F3CA /* SecondViewController.swift */,
 			);
 			path = Week5;
 			sourceTree = "<group>";
@@ -141,7 +147,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				21DA91582B7FA45100A0F3CA /* SecondViewController.swift in Sources */,
 				21D0509E2B76603C0059600A /* Contact.swift in Sources */,
+				21DA91562B7F9C7100A0F3CA /* contactTableViewCell.swift in Sources */,
 				21D0508E2B765D8F0059600A /* ViewController.swift in Sources */,
 				21D0508A2B765D8F0059600A /* AppDelegate.swift in Sources */,
 				21D0508C2B765D8F0059600A /* SceneDelegate.swift in Sources */,
@@ -294,8 +302,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = S92YL3K843;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Week5/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -303,6 +313,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -310,6 +321,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = ca.humber.Week5;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -321,8 +333,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Week5/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -330,6 +344,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -337,6 +352,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = ca.humber.Week5;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -353,7 +369,7 @@
 				21D050992B765D900059600A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		21D0509A2B765D900059600A /* Build configuration list for PBXNativeTarget "Week5" */ = {
 			isa = XCConfigurationList;
@@ -362,7 +378,7 @@
 				21D0509C2B765D900059600A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 /* End XCConfigurationList section */
 	};
