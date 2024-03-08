@@ -31,6 +31,11 @@ class ViewController: UIViewController , UITableViewDelegate, UITableViewDataSou
         // Do any additional setup after loading the view.
 
     }
+    override func viewWillAppear(_ animated: Bool) {
+        localContacts = (UIApplication.shared.delegate as? AppDelegate)?.allContacts
+        contactTable.reloadData()
+        
+    }
 
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -72,7 +77,7 @@ class ViewController: UIViewController , UITableViewDelegate, UITableViewDataSou
             let detailVC = segue.destination as? DetailViewController
             let sc = localContacts![contactTable.indexPathForSelectedRow!.row]
             detailVC!.contact = sc
-            
+            detailVC!.contactIndex = contactTable.indexPathForSelectedRow!.row
             
             
         }
@@ -223,9 +228,6 @@ class ViewController: UIViewController , UITableViewDelegate, UITableViewDataSou
         imagePickerController.delegate = self
         
         present(imagePickerController, animated: true)
-        
-        
-        
     }
     
     

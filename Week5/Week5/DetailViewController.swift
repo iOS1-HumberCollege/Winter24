@@ -7,7 +7,10 @@
 
 import UIKit
 
-class DetailViewController: UIViewController {
+class DetailViewController: UIViewController , EditingContactDelegate{
+  
+    
+   
 
     @IBOutlet weak var name: UILabel!
     
@@ -20,6 +23,8 @@ class DetailViewController: UIViewController {
     
     @IBOutlet weak var contactImage: UIImageView!
     var contact : Contact? 
+    var contactIndex: Int = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -32,14 +37,30 @@ class DetailViewController: UIViewController {
     }
     
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+       let EVC =  segue.destination as? EditViewController
+        EVC!.delegate = self
+        EVC!.contact = contact
     }
-    */
-
+    
+    
+    
+    
+    func editingContactDidCanceled() {
+        
+    }
+    
+    func editingContactDidFinished(updatedContact: Contact) {
+     
+        name.text = updatedContact.name
+        number.text = updatedContact.number
+        location.text = updatedContact.location
+        contactImage.image = updatedContact.image
+        
+        (UIApplication.shared.delegate as? AppDelegate)?.allContacts[contactIndex] = updatedContact
+    }
 }
