@@ -10,6 +10,7 @@ import UIKit
 class ViewController: UIViewController , UITableViewDelegate, UITableViewDataSource ,UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     var newcontact = Contact()
     
+    var localContacts = (UIApplication.shared.delegate as? AppDelegate)?.allContacts
     
     var selectedImage = UIImage(named: "emptyImage")
     
@@ -23,7 +24,7 @@ class ViewController: UIViewController , UITableViewDelegate, UITableViewDataSou
     
     
  
-    var allContacts = [Contact]()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,7 +34,7 @@ class ViewController: UIViewController , UITableViewDelegate, UITableViewDataSou
 
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return allContacts.count // 2
+        return localContacts!.count // 2
     }
     
     
@@ -49,10 +50,10 @@ class ViewController: UIViewController , UITableViewDelegate, UITableViewDataSou
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell { // 3
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as? contactTableViewCell
-        cell?.nameText.text = allContacts[indexPath.row].name
-        cell?.numberText.text = allContacts[indexPath.row].number
-        cell?.contactImg.image = allContacts[indexPath.row].image
-        cell?.locationText.text = allContacts[indexPath.row].location
+        cell?.nameText.text = localContacts![indexPath.row].name
+        cell?.numberText.text = localContacts![indexPath.row].number
+        cell?.contactImg.image = localContacts![indexPath.row].image
+        cell?.locationText.text = localContacts![indexPath.row].location
         
         
         return cell!
@@ -65,20 +66,26 @@ class ViewController: UIViewController , UITableViewDelegate, UITableViewDataSou
         if segue.identifier == "green"{
             
             let GVC = segue.destination as? GreenViewController
-            GVC?.numOfContact = allContacts.count
+            GVC?.numOfContact = localContacts!.count
+        }
+        if segue.identifier == "todetail"{
+            let detailVC = segue.destination as? DetailViewController
+            let sc = localContacts![contactTable.indexPathForSelectedRow!.row]
+            detailVC!.contact = sc
+            
+            
+            
         }
         else {
            let RVC = segue.destination as? RedViewController
-            RVC?.isThereContacts = !allContacts.isEmpty
+            RVC?.isThereContacts = !localContacts!.isEmpty
         }
+        
+        
     }
     
     
     @IBAction func saveClicked(_ sender: Any) {
-
-        
-        
-        
         if let goodname = contactNameText.text {
             if let goodNum = contactPhoneNumberText.text{
                 if (!goodname.isEmpty && !goodNum.isEmpty) {
@@ -90,8 +97,9 @@ class ViewController: UIViewController , UITableViewDelegate, UITableViewDataSou
                         self.newcontact.number = goodNum
                         self.newcontact.location = "SIM1"
                         self.newcontact.image = self.selectedImage
-                        self.allContacts.append(self.newcontact)
+                        self.localContacts?.append(self.newcontact)
 
+                        (UIApplication.shared.delegate as? AppDelegate)?.allContacts.append(self.newcontact)
                         // update the table // reload
                         self.contactTable.reloadData()
                         self.clearTexts()
@@ -106,8 +114,10 @@ class ViewController: UIViewController , UITableViewDelegate, UITableViewDataSou
                         self.newcontact.number = goodNum
                         self.newcontact.location = "SIM2"
                         self.newcontact.image = self.selectedImage
-                        self.allContacts.append(self.newcontact)
-                        // update the table // reload
+                        self.localContacts?.append(self.newcontact)
+
+                        (UIApplication.shared.delegate as? AppDelegate)?.allContacts.append(self.newcontact)
+                                               // update the table // reload
                         self.contactTable.reloadData()
                         self.clearTexts()
                         self.selectedImage = UIImage(named: "emptyImage")
@@ -155,16 +165,9 @@ class ViewController: UIViewController , UITableViewDelegate, UITableViewDataSou
 //    
 //    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 //        
-//        var selectedContact = allContacts[indexPath.row]
-//        
-//        let alert = UIAlertController(title: "Calling Or SMS \(selectedContact.name)?", message: "", preferredStyle: .alert)
-//        
-//        alert.addAction(UIAlertAction(title: "Call \(selectedContact.name)", style: .default))
-//        
-//        alert.addAction(UIAlertAction(title: "Send SMS to \(selectedContact.name)", style: .default))
-//        alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel))
-//        
-//        present(alert, animated: true)
+//       // performSegue(withIdentifier: "todetail", sender: nil)
+//
+//            
 //        
 //        
 //    }
@@ -179,12 +182,14 @@ class ViewController: UIViewController , UITableViewDelegate, UITableViewDataSou
         
         switch (editingStyle){
         case .delete :
-            var selectedContact = allContacts[indexPath.row]
-            let alert = UIAlertController(title: "Be Carful?", message: "Are You Sure you want to delete \(selectedContact.name)", preferredStyle: .alert)
+            var selectedContact = localContacts?[indexPath.row]
+            let alert = UIAlertController(title: "Be Carful?", message: "Are You Sure you want to delete \(selectedContact!.name)", preferredStyle: .alert)
             
             alert.addAction(UIAlertAction(title: "Delete", style: .destructive,handler: { action in
-                    self.allContacts.remove(at: indexPath.row)
-                    self.contactTable.reloadData()
+                self.localContacts!.remove(at: indexPath.row)
+                (UIApplication.shared.delegate as? AppDelegate)?.allContacts.remove(at: indexPath.row)
+                
+                self.contactTable.reloadData()
             }))
             
             alert.addAction(UIAlertAction(title: "No", style: .cancel))
