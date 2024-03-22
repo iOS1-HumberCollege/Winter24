@@ -28,8 +28,9 @@ class ViewController: UIViewController , UITableViewDelegate, UITableViewDataSou
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
 
+        
+        
     }
     override func viewWillAppear(_ animated: Bool) {
         localContacts = (UIApplication.shared.delegate as? AppDelegate)?.allContacts

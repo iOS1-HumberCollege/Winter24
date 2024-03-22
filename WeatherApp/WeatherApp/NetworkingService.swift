@@ -73,7 +73,7 @@ class NetworkingService {
     
     func getWeatherInCity(fullCityName: String){
         let key = "071c3ffca10be01d334505630d2c1a9c"
-        var url = "https://api.openweathermap.org/data/2.5/weather?q=\(fullCityName)&appid=\(key)&units=metric"
+        let url = "https://api.openweathermap.org/data/2.5/weather?q=\(fullCityName)&appid=\(key)&units=metric"
         
         let urlObj = URL(string: url)!
          let task = URLSession.shared.dataTask(with: urlObj) { data, response, error in
@@ -93,21 +93,23 @@ class NetworkingService {
                  print(jsonString)
                  // convert json string ===> List of String
                  do{
-                     let dic = try JSONSerialization.jsonObject(with: data!) as? NSDictionary
-                     let mainDic = dic!.value(forKey: "main") as? NSDictionary
-                     let temp =  mainDic?.value(forKey: "temp") as? Double
-                     let humidity =  mainDic?.value(forKey: "humidity") as? Int
+                    var weatherObject = try  JSONDecoder().decode(weatherJsonObject.self, from: data!)
                      
-                     let weatherArray = dic?.value(forKey: "weather") as? NSArray
-                     let desc = (weatherArray![0] as? NSDictionary)?.value(forKey: "description") as? String
-                     let icon = (weatherArray![0] as? NSDictionary)?.value(forKey: "icon") as? String
-                     
+//                     let dic = try JSONSerialization.jsonObject(with: data!) as? NSDictionary
+//                     let mainDic = dic!.value(forKey: "main") as? NSDictionary
+//                     let temp =  mainDic?.value(forKey: "temp") as? Double
+//                     let humidity =  mainDic?.value(forKey: "humidity") as? Int
+//                     
+//                     let weatherArray = dic?.value(forKey: "weather") as? NSArray
+//                     let desc = (weatherArray![0] as? NSDictionary)?.value(forKey: "description") as? String
+//                     let icon = (weatherArray![0] as? NSDictionary)?.value(forKey: "icon") as? String
+//                     
                      let weatherObj = WeatherModel()
-                     weatherObj.description = desc
-                     weatherObj.humidity = humidity
-                     weatherObj.icon = icon
-                     weatherObj.temp = temp
-                     
+                     weatherObj.description = weatherObject.weather![0].description
+                     weatherObj.humidity = weatherObject.main?.humidity
+                     weatherObj.icon = weatherObject.weather![0].icon
+                     weatherObj.temp = weatherObject.main?.temp
+//
 //                     let weatherObj = try JSONDecoder().decode(WeatherModel.self, from: data!)
                      
                      DispatchQueue.main.async {
