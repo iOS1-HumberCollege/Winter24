@@ -43,7 +43,18 @@ class CitiesTableViewController: UITableViewController , UISearchBarDelegate , N
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String){
         if searchText.count > 2 {
-            NetworkingService.shared.getListOfCities(searchText: searchText)
+            // First Option - Networking Service with Delegate Protocol
+            //NetworkingService.shared.getListOfCities(searchText: searchText)
+            
+            // Second Option - Networking 2 Service with CompletionHandler
+            Networking2Service.shared.getListOfCities(searchText: searchText) { listOfCity in
+                    // do the UI update
+                DispatchQueue.main.async {
+                    self.appDelegate?.cityList = listOfCity
+                    self.tableView.reloadData()
+                }
+            }
+            
         }
         if searchText.count == 0 {
             appDelegate?.cityList = []

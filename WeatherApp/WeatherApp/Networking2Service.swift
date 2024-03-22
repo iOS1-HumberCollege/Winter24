@@ -9,31 +9,26 @@ import Foundation
 
 class Networking2Service {
     
-    static var shared = NetworkingService()
+    static var shared = Networking2Service()
     
-
-    func getListOfCities(searchText: String){
+    func getListOfCities(searchText: String, completiongHandler: @escaping ([String])->Void){
        
         let urlObj = URL(string: "http://gd.geobytes.com/AutoCompleteCity?&q="+searchText)!
         let task = URLSession.shared.dataTask(with: urlObj) { data, response, error in
             
             if error != nil {
-                self.citiesDelegate?.networkingDidFinishWithError()
                 return
             }
             guard let httpResponse = response as? HTTPURLResponse,
                        (200...299).contains(httpResponse.statusCode) else {
-                        self.citiesDelegate?.networkingDidFinishWithError()
-                        return
+                return
                    }
             if let jsonString = String(data: data!, encoding: .utf8) {
                 print(jsonString)
                 // convert json string ===> List of String
                 do{
                     let listOfCities = try JSONDecoder().decode([String].self, from: data!)
-                    DispatchQueue.main.async {
-                        self.citiesDelegate?.networkingDidFinishWithListOfCities(list: listOfCities)
-                    }
+                    completiongHandler(listOfCities)
                     
                 }
                 catch{
@@ -48,7 +43,7 @@ class Networking2Service {
     }
     
     
-    func getWeatherInCity(fullCityName: String){
+    func getWeatherInCity(fullCityName: String, complitionHandler :@escaping (WeatherModel)->Void){
         let key = "071c3ffca10be01d334505630d2c1a9c"
         let url = "https://api.openweathermap.org/data/2.5/weather?q=\(fullCityName)&appid=\(key)&units=metric"
         
@@ -56,13 +51,12 @@ class Networking2Service {
          let task = URLSession.shared.dataTask(with: urlObj) { data, response, error in
              
              if error != nil {
-                 self.weatherDelegate?.networkingDidFinishWithError()
                  return
              }
              guard let httpResponse = response as? HTTPURLResponse,
                         (200...299).contains(httpResponse.statusCode) else {
-                        self.weatherDelegate?.networkingDidFinishWithError()
-                         return
+
+                 return
                     }
              
              ///
@@ -70,7 +64,7 @@ class Networking2Service {
                  print(jsonString)
                  // convert json string ===> List of String
                  do{
-                    var weatherObject = try  JSONDecoder().decode(weatherJsonObject.self, from: data!)
+                     let weatherObject = try  JSONDecoder().decode(weatherJsonObject.self, from: data!)
                      
 //                     let dic = try JSONSerialization.jsonObject(with: data!) as? NSDictionary
 //                     let mainDic = dic!.value(forKey: "main") as? NSDictionary
@@ -86,12 +80,8 @@ class Networking2Service {
                      weatherObj.humidity = weatherObject.main?.humidity
                      weatherObj.icon = weatherObject.weather![0].icon
                      weatherObj.temp = weatherObject.main?.temp
-//
-//                     let weatherObj = try JSONDecoder().decode(WeatherModel.self, from: data!)
-                     
-                     DispatchQueue.main.async {
-                         self.weatherDelegate?.networkingDidFinishWithWeatherObject(weatherObj: weatherObj)
-                     }
+
+                     complitionHandler(weatherObj)
                      
                  }
                  catch{
@@ -100,16 +90,9 @@ class Networking2Service {
                  }
                  
          }
-             
-             
-             
-             
          }
          
          task.resume()
-         
-         
-        
     }
     
     

@@ -26,8 +26,15 @@ class WeatherViewController: UIViewController , NetworkingWeatherDelegate {
         NetworkingService.shared.weatherDelegate = self
         loadingIndicator.startAnimating()
         title = "\(cityFromFVC)"
-        
-        NetworkingService.shared.getWeatherInCity(fullCityName: cityFromFVC)
+        // First Option - Networking with Protocol
+       // NetworkingService.shared.getWeatherInCity(fullCityName: cityFromFVC)
+            
+        // Second Option - Networking with Complition Handler
+        Networking2Service.shared.getWeatherInCity(fullCityName: cityFromFVC) { weatherOBJ in
+            DispatchQueue.main.async {
+                self.updateUIWithWeatherData(weatherObj: weatherOBJ)
+            }
+        }
     }
     
 
@@ -35,6 +42,10 @@ class WeatherViewController: UIViewController , NetworkingWeatherDelegate {
     
     
     func networkingDidFinishWithWeatherObject(weatherObj: WeatherModel) {
+        updateUIWithWeatherData(weatherObj: weatherObj)
+    }
+    
+    func updateUIWithWeatherData(weatherObj: WeatherModel){
         descText.text = weatherObj.description!
         tempText.text = "Temp:  \(String(describing: weatherObj.temp!))"
         humidityText.text = "Humidity: \(String(describing: weatherObj.humidity!))"
