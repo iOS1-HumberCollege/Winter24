@@ -43,7 +43,7 @@ class Networking2Service {
     }
     
     
-    func getWeatherInCity(fullCityName: String, complitionHandler :@escaping (WeatherModel)->Void){
+    func getWeatherInCity(fullCityName: String, complitionHandler :@escaping (Result<WeatherModel,Error>)->Void){
         let key = "071c3ffca10be01d334505630d2c1a9c"
         let url = "https://api.openweathermap.org/data/2.5/weather?q=\(fullCityName)&appid=\(key)&units=metric"
         
@@ -51,11 +51,13 @@ class Networking2Service {
          let task = URLSession.shared.dataTask(with: urlObj) { data, response, error in
              
              if error != nil {
+                 complitionHandler(.failure(error!))
                  return
              }
              guard let httpResponse = response as? HTTPURLResponse,
                         (200...299).contains(httpResponse.statusCode) else {
-
+                
+                 complitionHandler(.failure(error!))
                  return
                     }
              
@@ -81,7 +83,8 @@ class Networking2Service {
                      weatherObj.icon = weatherObject.weather![0].icon
                      weatherObj.temp = weatherObject.main?.temp
 
-                     complitionHandler(weatherObj)
+                     complitionHandler(.success(weatherObj))
+                     
                      
                  }
                  catch{

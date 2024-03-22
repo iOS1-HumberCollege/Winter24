@@ -8,6 +8,8 @@
 import UIKit
 
 class WeatherViewController: UIViewController , NetworkingWeatherDelegate {
+  
+    
     @IBOutlet weak var weatherIcon: UIImageView!
     
     @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
@@ -27,14 +29,21 @@ class WeatherViewController: UIViewController , NetworkingWeatherDelegate {
         loadingIndicator.startAnimating()
         title = "\(cityFromFVC)"
         // First Option - Networking with Protocol
-       // NetworkingService.shared.getWeatherInCity(fullCityName: cityFromFVC)
-            
+        // NetworkingService.shared.getWeatherInCity(fullCityName: cityFromFVC)
+        
         // Second Option - Networking with Complition Handler
-        Networking2Service.shared.getWeatherInCity(fullCityName: cityFromFVC) { weatherOBJ in
-            DispatchQueue.main.async {
-                self.updateUIWithWeatherData(weatherObj: weatherOBJ)
+        Networking2Service.shared.getWeatherInCity(fullCityName: cityFromFVC) { result in
+            switch result{
+            case .failure(_): print("There is an error");
+                break
+            case .success(let WeatherObj):
+                DispatchQueue.main.async {
+                    self.updateUIWithWeatherData(weatherObj: WeatherObj)
+                }
+                break
             }
         }
+        
     }
     
 
