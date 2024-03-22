@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2153D57A2BADBEAE00C94670 /* Networking2Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2153D5792BADBEAE00C94670 /* Networking2Service.swift */; };
 		21F95B812BA472A3006FF3B5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F95B802BA472A3006FF3B5 /* AppDelegate.swift */; };
 		21F95B832BA472A3006FF3B5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F95B822BA472A3006FF3B5 /* SceneDelegate.swift */; };
 		21F95B882BA472A3006FF3B5 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 21F95B872BA472A3006FF3B5 /* Base */; };
@@ -19,6 +20,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2153D5792BADBEAE00C94670 /* Networking2Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networking2Service.swift; sourceTree = "<group>"; };
 		21F95B7D2BA472A3006FF3B5 /* WeatherApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeatherApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		21F95B802BA472A3006FF3B5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		21F95B822BA472A3006FF3B5 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -72,6 +74,7 @@
 				21F95B962BA47BD8006FF3B5 /* WeatherViewController.swift */,
 				21F95B982BA47C32006FF3B5 /* NetworkingService.swift */,
 				21F95B9A2BA47DCA006FF3B5 /* WeatherModel.swift */,
+				2153D5792BADBEAE00C94670 /* Networking2Service.swift */,
 			);
 			path = WeatherApp;
 			sourceTree = "<group>";
@@ -150,6 +153,7 @@
 				21F95B992BA47C32006FF3B5 /* NetworkingService.swift in Sources */,
 				21F95B812BA472A3006FF3B5 /* AppDelegate.swift in Sources */,
 				21F95B972BA47BD8006FF3B5 /* WeatherViewController.swift in Sources */,
+				2153D57A2BADBEAE00C94670 /* Networking2Service.swift in Sources */,
 				21F95B832BA472A3006FF3B5 /* SceneDelegate.swift in Sources */,
 				21F95B9B2BA47DCA006FF3B5 /* WeatherModel.swift in Sources */,
 				21F95B952BA472E8006FF3B5 /* CitiesTableViewController.swift in Sources */,

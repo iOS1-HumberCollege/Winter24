@@ -1,29 +1,16 @@
 //
-//  NetworkingService.swift
+//  Networking2Service.swift
 //  WeatherApp
 //
-//  Created by Rania Arbash on 2024-03-15.
+//  Created by Rania Arbash on 2024-03-22.
 //
 
 import Foundation
 
-protocol NetworkingCitiesDelegate {
-    func networkingDidFinishWithListOfCities(list: [String]);
-    func networkingDidFinishWithError();
-}
-
-protocol NetworkingWeatherDelegate {
-    func networkingDidFinishWithWeatherObject(weatherObj: WeatherModel);
-    func networkingDidFinishWithError();
-}
-
-class NetworkingService {
+class Networking2Service {
     
     static var shared = NetworkingService()
     
-    
-    var citiesDelegate: NetworkingCitiesDelegate?
-    var weatherDelegate: NetworkingWeatherDelegate?
 
     func getListOfCities(searchText: String){
        
@@ -89,11 +76,11 @@ class NetworkingService {
 //                     let mainDic = dic!.value(forKey: "main") as? NSDictionary
 //                     let temp =  mainDic?.value(forKey: "temp") as? Double
 //                     let humidity =  mainDic?.value(forKey: "humidity") as? Int
-//                     
+//
 //                     let weatherArray = dic?.value(forKey: "weather") as? NSArray
 //                     let desc = (weatherArray![0] as? NSDictionary)?.value(forKey: "description") as? String
 //                     let icon = (weatherArray![0] as? NSDictionary)?.value(forKey: "icon") as? String
-//                     
+//
                      let weatherObj = WeatherModel()
                      weatherObj.description = weatherObject.weather![0].description
                      weatherObj.humidity = weatherObject.main?.humidity

@@ -8,39 +8,59 @@
 import UIKit
 
 class WeatherViewController: UIViewController , NetworkingWeatherDelegate {
-   
+    @IBOutlet weak var weatherIcon: UIImageView!
+    
+    @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
+    
+    
+    
     var cityFromFVC : String = ""
   
+    @IBOutlet weak var descText: UILabel!
     
-
+    @IBOutlet weak var tempText: UILabel!
+    
+    @IBOutlet weak var humidityText: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
         NetworkingService.shared.weatherDelegate = self
-        
+        loadingIndicator.startAnimating()
+        title = "\(cityFromFVC)"
         
         NetworkingService.shared.getWeatherInCity(fullCityName: cityFromFVC)
-        // Do any additional setup after loading the view.
     }
     
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
     
     
     func networkingDidFinishWithWeatherObject(weatherObj: WeatherModel) {
-        print(weatherObj.temp)
-        print(weatherObj.description)
+        descText.text = weatherObj.description!
+        tempText.text = "Temp:  \(String(describing: weatherObj.temp!))"
+        humidityText.text = "Humidity: \(String(describing: weatherObj.humidity!))"
+        downloadImage(iconValue: weatherObj.icon!)
+        loadingIndicator.stopAnimating()
+        loadingIndicator.isHidden = true
     }
     
+    func downloadImage(iconValue: String){
     
+        let myQ = DispatchQueue(label: "myQ")
+        myQ.async {
+            let iconURL = "https://openweathermap.org/img/wn/\(iconValue)@2x.png"
+            do{
+                let urlObject = URL(string: iconURL)
+                if let goodURL = urlObject {
+                    let imageData = try Data(contentsOf: goodURL)
+                    DispatchQueue.main.async {
+                        self.weatherIcon.image = UIImage(data: imageData)
+                    }
+                }
+            }catch {
+                print(error)
+            }
+        }
+    }
     func networkingDidFinishWithError() {
         
     }
