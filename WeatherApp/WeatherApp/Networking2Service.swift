@@ -47,6 +47,11 @@ class Networking2Service {
         let key = "071c3ffca10be01d334505630d2c1a9c"
         let url = "https://api.openweathermap.org/data/2.5/weather?q=\(fullCityName)&appid=\(key)&units=metric"
         
+//        var request = URLRequest(url: URL(string: ""))
+//        request.addValue(<#T##String#>, forHTTPHeaderField: "symbol_set")
+//        
+       // URLSession.shared.dataTask(with: URLRequest)
+        
         let urlObj = URL(string: url)!
          let task = URLSession.shared.dataTask(with: urlObj) { data, response, error in
              

@@ -14,14 +14,12 @@ class WeatherViewController: UIViewController , NetworkingWeatherDelegate {
     
     @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
     
-    
-    
     var cityFromFVC : String = ""
   
     @IBOutlet weak var descText: UILabel!
     
     @IBOutlet weak var tempText: UILabel!
-    
+        
     @IBOutlet weak var humidityText: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
